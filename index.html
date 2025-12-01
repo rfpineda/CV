@@ -1,288 +1,148 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Rodolfo Pineda Mejía — CV interactivo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    :root{
-      --bg:#0f1724; --card:#0b1220; --muted:#97a0b9; --accent:#2b8cff; --glass: rgba(255,255,255,0.03);
-      --radius:16px; --maxw:980px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,Arial; background:linear-gradient(180deg,#061022 0%, #071229 60%); color:#e6eef8; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
-      line-height:1.45; overflow:hidden;
-    }
-    .wrap{max-width:var(--maxw); margin:40px auto; padding:28px; background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); border-radius:20px; box-shadow:0 10px 30px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.03); height:calc(100vh - 80px); overflow:auto}
-    header{display:flex; align-items:center; gap:18px; margin-bottom:16px}
-    .avatar{width:88px; height:88px; border-radius:14px; background:linear-gradient(135deg,#1f6feb,#4fc3f7); display:flex; align-items:center; justify-content:center; font-weight:700; color:#021024; font-size:28px}
-    h1{font-size:20px; margin:0}
-    .subtitle{color:var(--muted); font-size:13px}
-    .top-actions{margin-left:auto; display:flex; gap:10px}
-    .btn{background:var(--accent); color:white; border:none; padding:8px 12px; border-radius:10px; cursor:pointer; font-weight:600}
-    .btn.ghost{background:transparent; border:1px solid rgba(255,255,255,0.06); color:var(--muted)}
-
-    nav{display:flex; gap:8px; padding:12px 0; border-top:1px solid rgba(255,255,255,0.02); border-bottom:1px solid rgba(255,255,255,0.02); margin-bottom:18px}
-    nav a{color:var(--muted); text-decoration:none; padding:8px 10px; border-radius:8px}
-    nav a.active{background:var(--glass); color:var(--accent);}
-
-    section{padding:18px 0; border-bottom:1px dashed rgba(255,255,255,0.02)}
-    .lead{display:flex; gap:20px}
-    .col{flex:1}
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01)); padding:16px; border-radius:14px; border:1px solid rgba(255,255,255,0.03)}
-    .muted{color:var(--muted)}
-    ul{padding-left:18px}
-
-    .skills{display:flex; flex-wrap:wrap; gap:8px}
-    .skill{background:rgba(255,255,255,0.03); padding:6px 10px; border-radius:999px; font-size:13px; color:var(--muted)}
-
-    .experience-item{display:flex; gap:14px; align-items:flex-start}
-    .exp-meta{min-width:210px}
-    .exp-title{font-weight:700}
-    .exp-company{color:var(--muted); font-size:13px}
-
-    .small{font-size:13px}
-    footer{display:flex; justify-content:space-between; align-items:center; padding-top:12px}
-
-    /* reveal animation */
-    .reveal{opacity:0; transform:translateY(18px) scale(.995); transition:opacity .6s ease,transform .6s cubic-bezier(.2,.9,.3,1)}
-    .reveal.visible{opacity:1; transform:none}
-
-    @media (max-width:720px){.wrap{margin:18px; padding:18px; height:auto} header{gap:12px} .lead{flex-direction:column}}
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>CV – Rodolfo Pineda Mejía</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.0.5/lenis.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.0.5/lenis.min.js"></script>
+<style>
+  :root {
+    --bg: #f4f6f9;
+    --text: #1a1a1a;
+    --card-bg: #ffffff;
+    --primary: #2a4ae8;
+  }
+  [data-theme="dark"] {
+    --bg: #111;
+    --text: #f5f5f5;
+    --card-bg: #1b1b1b;
+    --primary: #5c7cff;
+  }
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+  }
+  .container {
+    max-width: 1050px;
+    margin: auto;
+    padding: 40px 25px;
+  }
+  .card {
+    background: var(--card-bg);
+    padding: 28px;
+    margin-bottom: 28px;
+    border-radius: 14px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  }
+  h1, h2, h3 {
+    margin-top: 0;
+  }
+  h1 {
+    font-size: 2.4em;
+    margin-bottom: 5px;
+  }
+  h2 {
+    margin-top: 25px;
+    color: var(--primary);
+    font-size: 1.4em;
+  }
+  .toggle {
+    position: fixed;
+    top: 20px;
+    right: 25px;
+    background: var(--card-bg);
+    border: 1px solid #8882;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+  }
+</style>
 </head>
 <body>
-  <div class="wrap" id="container">
-    <header class="reveal">
-      <div class="avatar">RP</div>
-      <div>
-        <h1>Rodolfo Pineda Mejía</h1>
-        <div class="subtitle">Ingeniero de Sistemas · Arquitecto de Software · Gerente de Producto · IA Organizacional</div>
-      </div>
-      <div class="top-actions">
-        <button class="btn" onclick="window.print()">Imprimir / PDF</button>
-        <button class="btn ghost" id="downloadBtn">Descargar HTML</button>
-      </div>
-    </header>
+<button id="themeToggle" class="toggle">Cambiar tema</button>
+<div class="container">
+  <h1>Rodolfo Pineda Mejía</h1>
+  <p><strong>Ingeniero de Sistemas | Arquitecto de Software | Líder en Transformación Digital e IA Organizacional</strong></p>
 
-    <nav class="reveal" id="nav">
-      <a href="#perfil" class="active">Perfil</a>
-      <a href="#experiencia">Experiencia</a>
-      <a href="#educacion">Formación</a>
-      <a href="#skills">Habilidades</a>
-      <a href="#cursos">Cursos</a>
-      <a href="#referencias">Referencias</a>
-    </nav>
-
-    <main>
-      <section id="perfil" class="reveal">
-        <div class="lead">
-          <div class="col card">
-            <h3>Extracto Ejecutivo</h3>
-            <p class="muted small">Ingeniero de Sistemas con amplia experiencia liderando transformaciones tecnológicas, arquitectura de software y dirección de productos. Especializado en .NET 10, Blazor, MAUI, Azure y diseño de Sistemas de IA Organizacional para integrar agentes cognitivos y automatización en productos corporativos.</p>
-            <ul>
-              <li>Enfoque: arquitectura escalable, estandarización, integración IA y entrega ágil.</li>
-              <li>Industria: financiero, salud, logística, retail y energía.</li>
-            </ul>
-          </div>
-
-          <aside class="col" style="max-width:300px">
-            <div class="card">
-              <h4 class="small">Contacto</h4>
-              <div class="small muted">Barranquilla, Colombia</div>
-              <div style="margin-top:8px"><strong>Email:</strong> tu.email@ejemplo.com</div>
-              <div style="margin-top:6px"><strong>Tel:</strong> +57 300 000 0000</div>
-              <div style="margin-top:6px"><strong>LinkedIn:</strong> linkedin.com/in/tu-perfil</div>
-            </div>
-          </aside>
-        </div>
-      </section>
-
-      <section id="experiencia" class="reveal">
-        <h3>Experiencia Profesional</h3>
-
-        <div class="card" style="margin-top:12px">
-          <div class="experience-item">
-            <div class="exp-meta">
-              <div class="exp-title">AIMCORP</div>
-              <div class="exp-company">Gerente de Producto · Ene 2025 – Actualidad · Barranquilla</div>
-            </div>
-            <div>
-              <div class="small muted">Lideré la transición a .NET 10 y la creación de una arquitectura compartida para 4 productos (AIM Elite, BoxAPI, WLS, AIMCorp Hub). Implementé IA organizacional con Azure OpenAI, apps móviles en MAUI y front en Blazor.</div>
-              <ul>
-                <li>Arquitectura modular y APIs REST estandarizadas.</li>
-                <li>Implementación de agentes IA, automatización cognitiva y generación de informes inteligentes.</li>
-                <li>Modelo de desarrollo centralizado que acelera software a la medida.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:12px">
-          <div class="experience-item">
-            <div class="exp-meta">
-              <div class="exp-title">Alta Gerencia de Tecnología Informática (AGTI)</div>
-              <div class="exp-company">Gerente de Producto / Líder Técnico · Abr 2018 – Ene 2025</div>
-            </div>
-            <div>
-              <div class="small muted">Conduje la modernización del stack (frontend y backend), creando la base para productos como LinkerBox y AIM Elite. Implementé migraciones a .NET Core, Blazor y prácticas CI/CD en Azure DevOps.</div>
-              <ul>
-                <li>Optimización de recursos y unificación tecnológica para múltiples clientes (ej.: ISA Transelca, Jamar, Procaps).</li>
-                <li>Reducción de duplicidad de código y aceleración de tiempo de entrega.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:12px">
-          <div class="experience-item">
-            <div class="exp-meta">
-              <div class="exp-title">Banco Serfinansa</div>
-              <div class="exp-company">Desarrollador Senior · Ene 2015 – Abr 2018</div>
-            </div>
-            <div>
-              <div class="small muted">Lideré el desarrollo del core de la Tarjeta de Crédito Olímpica y participé en el SIG organizacional durante la transición hacia el nuevo core bancario.</div>
-              <ul>
-                <li>Desarrollo en DB2, Informix, 4GL e ILE RPG; construcción de Web Services SOAP/REST.</li>
-                <li>Estabilización de procesos críticos y soporte de migración del core.</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div class="card" style="margin-top:12px">
-          <div class="experience-item">
-            <div class="exp-meta">
-              <div class="exp-title">Universidad del Norte / Proyectos</div>
-              <div class="exp-company">Desarrollador .NET · Nov 2013 – Ene 2015</div>
-            </div>
-            <div>
-              <div class="small muted">Desarrollo del sistema Arquimet 3.0 para ACESCO S.A.S en C#, DevExpress y SQL Server.</div>
-            </div>
-          </div>
-        </div>
-
-      </section>
-
-      <section id="educacion" class="reveal">
-        <h3>Formación</h3>
-        <div class="card">
-          <strong>Ingeniería de Sistemas y Computación</strong>
-          <div class="small muted">Universidad del Norte — Barranquilla (2009 – 2014)</div>
-        </div>
-      </section>
-
-      <section id="skills" class="reveal">
-        <h3>Habilidades</h3>
-        <div class="card">
-          <p class="muted small">Tecnologías, arquitectura y competencias clave.</p>
-          <div class="skills">
-            <span class="skill">C# / .NET 6–10</span>
-            <span class="skill">Blazor (Server/WASM)</span>
-            <span class="skill">.NET MAUI</span>
-            <span class="skill">Azure / DevOps</span>
-            <span class="skill">APIs REST</span>
-            <span class="skill">Azure OpenAI / IA Organizacional</span>
-            <span class="skill">SQL Server / DB2 / Informix</span>
-            <span class="skill">Clean Architecture / DDD</span>
-            <span class="skill">SCRUM / Gestión de Producto</span>
-          </div>
-        </div>
-      </section>
-
-      <section id="cursos" class="reveal">
-        <h3>Cursos y Certificaciones</h3>
-        <div class="card">
-          <ul>
-            <li><strong>Máster en Blazor – Server y WebAssembly (.NET 9)</strong> — Udemy</li>
-            <li><strong>Curso de .NET MAUI con Visual Studio – Creación de Proyectos</strong> — Udemy</li>
-            <li><strong>Arquitectura de Aplicaciones Empresariales con .NET 9</strong> — Udemy</li>
-          </ul>
-        </div>
-      </section>
-
-      <section id="referencias" class="reveal">
-        <h3>Referencias</h3>
-        <div class="card">
-          <ul>
-            <li><strong>Ing. Mauricio Pimienta</strong> — HILTI Colombia. Tel: 317 502 2435</li>
-            <li><strong>Rubén Darío Mejía</strong> — Todolámina y Cía S.A. Tel: 321 691 6732 / 360 4820</li>
-            <li><strong>Ing. José Márquez Díaz</strong> — Universidad del Norte. Tel: 321 691 6732 / 360 4820 · jmarquez@uninorte.edu.co</li>
-            <li><strong>Ing. Leonardo Campo Benavides</strong> — Director de Sistemas, Serfinansa. Tel: 321 568 7326 · lcampo@serfinansa.com.co</li>
-          </ul>
-        </div>
-      </section>
-
-    </main>
-
-    <footer class="reveal">
-      <div class="small muted">CV interactivo generado para presentación profesional — Rodolfo Pineda Mejía</div>
-      <div>
-        <button class="btn ghost" id="toggleTheme">Modo claro</button>
-      </div>
-    </footer>
+  <div class="card">
+    <h2>Perfil Profesional</h2>
+    <p>Ingeniero de Sistemas con más de 10 años de experiencia en arquitectura de software, ecosistema Microsoft Fullstack, dirección de equipos técnicos y liderazgo de proyectos tecnológicos de alto impacto. Experto en modernización tecnológica, adopción de .NET 10, arquitecturas escalables, implementación de productos empresariales y creación de sistemas de Inteligencia Artificial Organizacional integrados a plataformas móviles y web.</p>
   </div>
 
-  <!-- Lenis (smooth scroll) -->
-  <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
-  <script>
-    // Init Lenis for smooth scrolling inside the .wrap container
-    const wrap = document.getElementById('container');
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      direction: 'vertical',
-      gestureDirection: 'vertical',
-      smooth: true,
-      smoothTouch: false
-    });
+  <div class="card">
+    <h2>Experiencia Laboral</h2>
 
-    function raf(time) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
+    <h3>AIMCorp – Advanced Improvement Corporation<br><small>Gerente de Producto / Arquitecto de Software – 2025 · Actualidad</small></h3>
+    <ul>
+      <li>Dirección de la transición tecnológica completa hacia .NET 10, MAUI, Blazor y Azure.</li>
+      <li>Diseño de una arquitectura empresarial modular que permite que los 4 productos (AIM Elite, BoxAPI, WLS WorldLogistics y AIMCorp Hub) compartan una base de desarrollo escalable.</li>
+      <li>Implementación del Sistema de IA Organizacional con Azure OpenAI, integrando agentes, automatización y analítica dentro de los productos.</li>
+      <li>Definición y dirección del roadmap tecnológico para aplicaciones móviles, APIs REST y servicios internos.</li>
+    </ul>
 
-    // Reveal on scroll using IntersectionObserver
-    const reveals = document.querySelectorAll('.reveal');
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if(e.isIntersecting) e.target.classList.add('visible');
-      });
-    },{threshold:0.08});
-    reveals.forEach(r => io.observe(r));
+    <h3>Alta Gerencia de Tecnología Informática – AGTI<br><small>Gerente de Producto / Líder de Desarrollo Senior – 2018 · 2025</small></h3>
+    <ul>
+      <li>Liderazgo de una transformación tecnológica completa en front‑end y back‑end hacia Angular, ASP.NET, SyncFusion, y APIs modernas.</li>
+      <li>Base tecnológica unificada para productos como LinkerBox y AIM Elite, reduciendo tiempos de desarrollo y costos operativos.</li>
+      <li>Implementación de soluciones empresariales para Grupo ISA Transelca, Jamar, Medihelp, Procaps, Carnes Santacruz, Cementera San Marcos, Royal Films, Geobiotécnica, entre otros.</li>
+    </ul>
 
-    // Nav active state
-    const navLinks = document.querySelectorAll('nav a');
-    navLinks.forEach(a => a.addEventListener('click', (ev)=>{
-      ev.preventDefault();
-      document.querySelector(a.getAttribute('href')).scrollIntoView({behavior:'smooth', block:'start'});
-      navLinks.forEach(x=>x.classList.remove('active'));
-      a.classList.add('active');
-    }));
+    <h3>Serfinansa S.A<br><small>Desarrollador Senior – 2015 · 2018</small></h3>
+    <ul>
+      <li>Líder técnico del desarrollo del core transaccional de la Tarjeta de Crédito Olímpica.</li>
+      <li>Implementación y mantenimiento del SIG durante la transición hacia el nuevo core bancario.</li>
+      <li>Desarrollo en 4GL, ILERPG, DB2, Informix y servicios SOAP/REST.</li>
+    </ul>
 
-    // Theme toggle
-    const toggle = document.getElementById('toggleTheme');
-    let light=false;
-    toggle.addEventListener('click', ()=>{
-      light = !light;
-      if(light){document.documentElement.style.setProperty('--bg','#f6f9fc'); document.body.style.background='linear-gradient(180deg,#f6f9fc,#e9eef6)'; document.documentElement.style.setProperty('--card','#fff'); document.documentElement.style.setProperty('--muted','#667085'); toggle.textContent='Modo oscuro';}
-      else {document.documentElement.style.setProperty('--bg','#0f1724'); document.body.style.background='linear-gradient(180deg,#061022,#071229)'; document.documentElement.style.setProperty('--card','#0b1220'); document.documentElement.style.setProperty('--muted','#97a0b9'); toggle.textContent='Modo claro';}
-    });
+    <h3>Universidad del Norte<br><small>Desarrollador .NET – 2014 · 2015</small></h3>
+    <ul>
+      <li>Desarrollo para el proyecto Arquimet 3.0 (ACESCO), usando DevExpress y MS SQL Server.</li>
+    </ul>
 
-    // Download HTML
-    document.getElementById('downloadBtn').addEventListener('click', ()=>{
-      const blob = new Blob([document.documentElement.outerHTML], {type:'text/html'});
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'Rodolfo_Pineda_CV_interactivo.html'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-    });
+    <h3>Hilti Group / Todo Lámina<br><small>Soporte Técnico – 2012 · 2014</small></h3>
+  </div>
 
-  </script>
+  <div class="card">
+    <h2>Formación Académica</h2>
+    <p><strong>Ingeniero de Sistemas y Computación</strong><br>Universidad del Norte (2009 – 2014)</p>
+  </div>
+
+  <div class="card">
+    <h2>Certificaciones y Formación Complementaria</h2>
+    <ul>
+      <li>Máster en Blazor – Server y WebAssembly (.NET 9) – Udemy</li>
+      <li>Curso de .NET MAUI con Visual Studio 2022 – Creando Proyectos – Udemy</li>
+      <li>Arquitectura de Aplicaciones Empresariales con .NET 9 – Udemy</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>Referencias Profesionales</h2>
+    <ul>
+      <li>Ing. Mauricio Pimienta – Hilti Colombia</li>
+      <li>Rubén Darío Mejía – Todo Lámina</li>
+      <li>Ing. José Márquez Díaz – Universidad del Norte</li>
+      <li>Ing. Leonardo Campo Benavides – Serfinansa</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+const toggle = document.getElementById('themeToggle');
+const root = document.documentElement;
+
+toggle.addEventListener('click', () => {
+  const isDark = root.getAttribute('data-theme') === 'dark';
+  root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+});
+
+const lenis = new Lenis();
+function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
+</script>
 </body>
 </html>
