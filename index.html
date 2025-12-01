@@ -84,7 +84,7 @@
     box-shadow: 0 6px 18px rgba(2,6,23,0.15);
     border: 1px solid rgba(255,255,255,0.06);
   }
-  
+
   .profile-photo img {
     width:100%;
     height:100%;
@@ -105,11 +105,7 @@
   }
   .profile-photo.has-image .profile-initials { opacity:0; transform:scale(.95); transition:opacity .25s ease, transform .25s ease; pointer-events:none; }
   .profile-photo:hover img { transform: scale(1.04); }
-  @media (max-width:620px){
-    .profile-photo { width:64px; height:64px; border-radius:12px; }
-    .profile-initials { font-size:20px; }
-  }
-  
+
   .head-meta { display:flex; flex-direction:column; gap:4px; }
   .name { font-size:20px; font-weight:700; color:var(--text); }
   .role { font-size:13px; color:var(--muted); }
@@ -118,9 +114,10 @@
   .btn { cursor:pointer; padding:10px 14px; border-radius:10px; font-weight:600; border:0; background:var(--accent); color:white; box-shadow:0 6px 18px rgba(43,140,255,0.18); }
   .btn.ghost { background:transparent; color:var(--muted); border:1px solid rgba(255,255,255,0.04); }
 
-  /* Navigation */
-  nav.topnav { display:flex; gap:10px; margin-top:14px; align-items:center; flex-wrap:wrap; }
-  nav.topnav a { padding:8px 10px; border-radius:10px; text-decoration:none; color:var(--muted); font-weight:600; font-size:13px; }
+  /* Navigation - horizontal scroll on small screens */
+  nav.topnav { display:flex; gap:10px; margin-top:14px; align-items:center; flex-wrap:nowrap; overflow:auto; -webkit-overflow-scrolling:touch; padding-bottom:6px;}
+  nav.topnav::-webkit-scrollbar{display:none;}
+  nav.topnav a { padding:8px 10px; border-radius:10px; text-decoration:none; color:var(--muted); font-weight:600; font-size:13px; white-space:nowrap; }
   nav.topnav a.active { color:var(--accent); background:var(--glass); }
 
   /* Glass card */
@@ -150,37 +147,77 @@
   .chip { padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.03); color:var(--muted); font-weight:600; font-size:13px; border:1px solid rgba(255,255,255,0.03); }
 
   /* Footer */
-  footer{ margin-top:30px; display:flex; justify-content:space-between; align-items:center; gap:10px; color:var(--muted); font-size:13px; }
-  .contact-links { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
+  footer{ margin-top:30px; display:flex; flex-direction:column; align-items:center; gap:14px; color:var(--muted); font-size:13px; }
+  .contact-links { display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:center; }
   .contact-links a{ display:inline-flex; gap:8px; align-items:center; padding:8px 12px; border-radius:10px; background:rgba(255,255,255,0.02); text-decoration:none; color:var(--text); border:1px solid rgba(255,255,255,0.03); font-weight:600; font-size:13px; }
 
+  /* Footer QR */
   .footer-qr {
-    margin-top: 40px;
+    margin-top: 8px;
     text-align: center;
-    padding: 20px;
-    border-radius: 16px;
-    backdrop-filter: blur(15px);
-    background: rgba(var(--card-bg-rgb), 0.3);
-    border: 1px solid rgba(var(--border-color-rgb), 0.25);
-  }
-  
-  .footer-qr img {
-      width: 120px;
-      height: 120px;
-      object-fit: contain;
-      margin-bottom: 10px;
-  }
-  
-  .footer-qr p {
-      font-size: 0.9rem;
-      opacity: 0.8;
+    padding: 12px;
+    border-radius: 12px;
+    backdrop-filter: blur(6px);
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.03);
+    display:flex;
+    gap:12px;
+    align-items:center;
   }
 
-  
+  .footer-qr img {
+      width: 96px;
+      height: 96px;
+      object-fit: contain;
+      margin-bottom: 0;
+      border-radius:8px;
+      background:transparent;
+  }
+
+  .footer-qr p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      margin:0;
+  }
+
   /* small responsive tweaks */
-  @media (max-width:620px){
+  @media (max-width:980px){
     .logo{width:64px;height:64px;font-size:22px}
     .grid{gap:16px}
+    .header-actions { gap:6px; }
+    .btn { padding:8px 10px; font-size:14px; }
+  }
+
+  @media (max-width:620px){
+    /* Layout & paddings */
+    .container{ padding:16px 14px 60px; }
+    header.top { padding:10px 12px; border-radius:12px; top:10px; }
+    .profile-photo { width:64px; height:64px; border-radius:12px; }
+    .head-meta { gap:6px; }
+    .name { font-size:18px; }
+    .role { font-size:12px; line-height:1.25; max-height:3.6em; overflow:hidden; text-overflow:ellipsis; }
+
+    /* Hero & text sizing */
+    h1.hero { font-size:22px; line-height:1.18; }
+    p.lead { font-size:14px; }
+
+    /* Buttons full width stacked */
+    .glass > div[style*="display:flex"] a.btn,
+    .glass > div[style*="display:flex"] a.btn.ghost {
+      display:block; width:100%; box-sizing:border-box;
+    }
+
+    /* Chips and lists more compact */
+    .chip { padding:6px 10px; font-size:12px; }
+    ul.bullets { margin-left:14px; font-size:14px; }
+
+    /* Footer QR centered and smaller */
+    .footer-qr { flex-direction:column; padding:10px; gap:8px; }
+    .footer-qr img { width:80px; height:80px; }
+
+    /* Disable heavy effects for performance */
+    .parallax-layer { display:none; }
+    .glass { backdrop-filter: none; -webkit-backdrop-filter:none; border:1px solid rgba(255,255,255,0.02); box-shadow:none; }
   }
 
   /* animation initial states */
@@ -201,6 +238,7 @@
   <header class="top anim-hidden" id="header">
     <div class="logo profile-photo" aria-label="Foto de Rodolfo Pineda">
       <img id="profileImg" src="profile.jpg" alt="Foto de Rodolfo Pineda" />
+      <div class="profile-initials" id="profileInitials" aria-hidden="true">RP</div>
     </div>
     <div class="head-meta">
       <div class="name">Rodolfo Felipe Pineda Mejía</div>
@@ -255,7 +293,7 @@
             <p class="muted" style="color:var(--muted)">Responsable de la evolución tecnológica completa de la compañía, liderando la transición del ecosistema a .NET 10, MAUI, Blazor y una arquitectura modular avanzada que sirve como base común para todos los productos corporativos.</p>
             <ul class="bullets">
               <li>Diseño y dirección de una arquitectura compartida que permite crecimiento exponencial y coherencia entre productos.</li>
-              <li><strong>Liderazgo técnico en 4 productos principales</strong>strong>: AIM Elite, BoxAPI, WLS – WorldLogistics System y AIMCorp Hub.</li>
+              <li><strong>Liderazgo técnico en 4 productos principales:</strong> AIM Elite, BoxAPI, WLS – WorldLogistics System y AIMCorp Hub.</li>
               <li>Desarrollo de aplicaciones móviles con .NET MAUI y frontends Blazor; APIs REST para cada producto.</li>
               <li>Implementación del programa de <strong>IA Organizacional</strong>: agentes IA basados en Azure OpenAI, automatización cognitiva, pipelines de aprendizaje y generación dinámica de informes.</li>
               <li>Modelo centralizado de desarrollo (single codebase patterns) que acelera entregas y reduce costos.</li>
@@ -270,7 +308,7 @@
             <ul class="bullets">
               <li>Migración progresiva a .NET Core / Blazor y estandarización de prácticas de desarrollo.</li>
               <li>Creación de la plataforma base para LinkerBox y AIM Elite, optimizando recursos y tiempos de despliegue.</li>
-              <li>Implementaciones y personalizaciones para clientes como <strong>Grupo ISA Transelca, Jamar, Medihelp, Procaps, Royal Films, Cementera San Marcos, Carnes Santacruz y más.</strong>strong></li>
+              <li>Implementaciones y personalizaciones para clientes como <strong>Grupo ISA Transelca, Jamar, Medihelp, Procaps, Royal Films, Cementera San Marcos, Carnes Santacruz y más.</strong></li>
               <li>Estandarización de pipelines CI/CD con Azure DevOps y mejora de estabilidad en despliegues IIS.</li>
             </ul>
           </article>
@@ -281,7 +319,7 @@
             <h4 id="serfinTitle">Desarrollador Senior – Analista de Sistemas</h4>
             <p class="muted" style="color:var(--muted)">Líder técnico en proyectos core y SIG, con foco en estabilidad y continuidad operativa durante una transición crítica del core bancario.</p>
             <ul class="bullets">
-              <li>Lideré el desarrollo del core de la <strong>Tarjeta de Crédito Olímpica</strong>strong>: procesos de facturación, pagos, cierres y cálculos financieros.</li>
+              <li>Lideré el desarrollo del core de la <strong>Tarjeta de Crédito Olímpica</strong>: procesos de facturación, pagos, cierres y cálculos financieros.</li>
               <li>Desarrollos y mantenimiento del SIG antes del nuevo core bancario.</li>
               <li>Tecnologías: DB2, Informix, 4GL, ILE RPG, Web Services SOAP/REST y AS/400.</li>
             </ul>
@@ -338,14 +376,14 @@
           <h3 id="contactTitle" style="margin:0 0 8px 0">Contacto</h3>
           <p class="muted" style="color:var(--muted); margin:0 0 12px 0">Barranquilla, Colombia</p>
           <div style="display:flex; flex-direction:column; gap:8px;">
-            <a class="contact-links" href="https://www.linkedin.com/in/tuusuario" target="_blank" style="text-decoration:none;color:inherit">
-              <span style="font-weight:700">LinkedIn:</span>&nbsp;<span style="color:var(--muted)">linkedin.com/in/tuusuario</span>
+            <a class="contact-links" href="https://www.linkedin.com/in/rodolfo-felipe-pineda-mejia-09b745227/" target="_blank" style="text-decoration:none;color:inherit">
+              <span style="font-weight:700">LinkedIn:</span>&nbsp;<span style="color:var(--muted)">linkedin.com/in/rfpineda</span>
             </a>
             <a href="https://wa.me/573001234567" target="_blank" style="text-decoration:none;color:inherit">
-              <span style="font-weight:700">WhatsApp / Tel:</span>&nbsp;<span style="color:var(--muted)">+57 300 123 4567</span>
+              <span style="font-weight:700">WhatsApp / Tel:</span>&nbsp;<span style="color:var(--muted)">+57 350 833 2649</span>
             </a>
             <a href="mailto:tucorreo@dominio.com" style="text-decoration:none;color:inherit">
-              <span style="font-weight:700">Email:</span>&nbsp;<span style="color:var(--muted)">tucorreo@dominio.com</span>
+              <span style="font-weight:700">Email:</span>&nbsp;<span style="color:var(--muted)">rfpineda1604@gmail.com</span>
             </a>
           </div>
 
@@ -421,7 +459,7 @@
         <button class="btn" id="downloadHtml">Descargar HTML</button>
         <button class="btn ghost" id="printPage" style="background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,0.04)">Imprimir / PDF</button>
       </div>
-      <div class="footer-qr">
+      <div class="footer-qr" aria-hidden="false">
           <img src="qr-linkedin.png" alt="QR LinkedIn Rodolfo Pineda">
           <p>Escanea para ver mi perfil en LinkedIn</p>
       </div>
@@ -441,12 +479,24 @@ requestAnimationFrame(raf);
 
 /* ---------------- Parallax multi-layer ---------------- */
 const p1 = document.getElementById('p1'), p2 = document.getElementById('p2'), p3 = document.getElementById('p3');
-window.addEventListener('scroll', () => {
+
+function updateParallax() {
   const sc = window.scrollY || window.pageYOffset;
-  if(p1) p1.style.transform = `translate3d(-50%, calc(-50% + ${sc * 0.03}px), 0) scale(1.08)`; // slowest
-  if(p2) p2.style.transform = `translate3d(-50%, calc(-50% + ${sc * 0.06}px), 0) scale(1.06)`;
-  if(p3) p3.style.transform = `translate3d(-50%, calc(-50% + ${sc * 0.10}px), 0) scale(1.04)`; // faster
-});
+  const isMobile = window.matchMedia && window.matchMedia('(max-width:620px)').matches;
+  if(isMobile){
+    // reduce or disable parallax on small devices for performance
+    if(p1) p1.style.transform = `translate3d(-50%, -50%, 0) scale(1.02)`;
+    if(p2) p2.style.transform = `translate3d(-50%, -50%, 0) scale(1.02)`;
+    if(p3) p3.style.transform = `translate3d(-50%, -50%, 0) scale(1.02)`;
+  } else {
+    if(p1) p1.style.transform = `translate3d(-50%, calc(-50% + ${sc * 0.03}px), 0) scale(1.08)`; // slowest
+    if(p2) p2.style.transform = `translate3d(-50%, calc(-50% + ${sc * 0.06}px), 0) scale(1.06)`;
+    if(p3) p3.style.transform = `translate3d(-50%, calc(-50% + ${sc * 0.10}px), 0) scale(1.04)`; // faster
+  }
+}
+window.addEventListener('scroll', updateParallax);
+window.addEventListener('resize', updateParallax);
+updateParallax();
 
 /* ---------------- Scroll-triggered animations (IntersectionObserver) ---------------- */
 const animTargets = document.querySelectorAll('.anim-hidden');
@@ -493,10 +543,30 @@ if(btnTheme) btnTheme.addEventListener('click', ()=> {
   applyTheme(current === 'dark' ? 'light' : 'dark');
 });
 
+/* ---------------- Profile image fallback handler ---------------- */
+(function(){
+  const img = document.getElementById('profileImg');
+  const container = img && img.closest('.profile-photo');
+  const initials = document.getElementById('profileInitials');
+  if(!img || !container) return;
+
+  img.addEventListener('load', () => {
+    container.classList.add('has-image');
+  });
+  img.addEventListener('error', () => {
+    img.style.display = 'none';
+    container.classList.remove('has-image');
+  });
+  if(img.complete){
+    if(img.naturalWidth && img.naturalHeight) container.classList.add('has-image');
+    else img.dispatchEvent(new Event('error'));
+  }
+})();
+
 /* ---------------- Download / Print handlers ---------------- */
 const downloadHtmlBtn = document.getElementById('downloadHtml');
 if(downloadHtmlBtn){
-  downloadHtmlBtn.addEventListener('click', ()=>{
+  downloadHtmlBtn.addEventListener('click', ()=>{ 
     const html = '<!doctype html>\\n' + document.documentElement.outerHTML;
     const blob = new Blob([html], {type:'text/html'});
     const url = URL.createObjectURL(blob);
