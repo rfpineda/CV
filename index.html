@@ -246,7 +246,8 @@
     </div>
 
     <div class="header-actions" role="toolbar" aria-label="Acciones">
-      <button class="btn ghost" id="themeBtn" title="Cambiar tema">Tema</button>
+      <button class="btn ghost" id="themeBtn" title="Cambiar tema">Tema</button>      
+      <button class="btn ghost" id="languageBtn" title="View English version">EN</button>
     </div>
   </header>
 
@@ -540,6 +541,15 @@ if(btnTheme) btnTheme.addEventListener('click', ()=> {
   const current = document.body.getAttribute('data-theme') || 'dark';
   applyTheme(current === 'dark' ? 'light' : 'dark');
 });
+
+/* ---------------- Language switch ---------------- */
+const languageBtn = document.getElementById('languageBtn');
+
+if(languageBtn){
+  languageBtn.addEventListener('click', () => {
+    window.location.href = 'indexUS.html';
+  });
+}
 
 /* ---------------- Profile image fallback handler ---------------- */
 (function(){
